@@ -73,6 +73,7 @@ public class CalculadoraCompleja extends Application{
 		resultadoComplejo.getChildren().addAll(resul1, suma, resul2, i);
 		
 		VBox vbox1 = new VBox();
+		
 	}
 	
 	
