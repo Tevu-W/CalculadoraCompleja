@@ -40,5 +40,14 @@ public class Complejo {
 	public final void setImaginario(final double imaginario) {
 		this.imaginarioProperty().set(imaginario);
 	}
+	
+	public Complejo add(Complejo c) {
+		Complejo r = new Complejo();
+		r.realProperty().bind(realProperty().add(c.realProperty()));
+		r.imaginarioProperty().bind(imaginarioProperty().add(c.imaginarioProperty()));
+		return r;
+	}
+	
+	
 
 }
