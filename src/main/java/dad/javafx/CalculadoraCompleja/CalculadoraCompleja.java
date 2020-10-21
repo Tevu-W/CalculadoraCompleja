@@ -120,15 +120,15 @@ public class CalculadoraCompleja extends Application {
 		ops.getSelectionModel().selectedItemProperty().addListener((o, ov, nv) -> {
 			if(ops.getSelectionModel().getSelectedItem() == "+") {
 				NumeroComplejo3 = NumeroComplejo1.add(NumeroComplejo2);
-				resulReal.textProperty().bind(NumeroComplejo3.realProperty().asString());
-				resulImagin.textProperty().bind(NumeroComplejo3.imaginarioProperty().asString());
+				resulReal.textProperty().bind(NumeroComplejo3.realProperty().asString("%.0f"));
+				resulImagin.textProperty().bind(NumeroComplejo3.imaginarioProperty().asString("%.0f"));
 				//Bindings.bindBidirectional(resulReal.textProperty(), NumeroComplejo3.realProperty(), new NumberStringConverter());
 				//Bindings.bindBidirectional(resulImagin.textProperty(), NumeroComplejo3.imaginarioProperty(), new NumberStringConverter());
 			}
 			if(ops.getSelectionModel().getSelectedItem() == "-") {
 				NumeroComplejo3 = NumeroComplejo1.substract(NumeroComplejo2);
-				resulReal.textProperty().bind(NumeroComplejo3.realProperty().asString());
-				resulImagin.textProperty().bind(NumeroComplejo3.imaginarioProperty().asString());
+				resulReal.textProperty().bind(NumeroComplejo3.realProperty().asString("%.0f"));
+				resulImagin.textProperty().bind(NumeroComplejo3.imaginarioProperty().asString("%.0f"));
 				//Bindings.bindBidirectional(resulReal.textProperty(), NumeroComplejo3.realProperty(), new NumberStringConverter());
 				//Bindings.bindBidirectional(resulImagin.textProperty(), NumeroComplejo3.imaginarioProperty(), new NumberStringConverter());
 			}
