@@ -48,6 +48,12 @@ public class Complejo {
 		return r;
 	}
 	
+	public Complejo substract(Complejo c) {
+		Complejo r = new Complejo();
+		r.realProperty().bind(realProperty().subtract(c.realProperty()));
+		r.imaginarioProperty().bind(imaginarioProperty().subtract(c.imaginarioProperty()));
+		return r;
+	}
 	
 
 }
