@@ -132,6 +132,13 @@ public class CalculadoraCompleja extends Application {
 				//Bindings.bindBidirectional(resulReal.textProperty(), NumeroComplejo3.realProperty(), new NumberStringConverter());
 				//Bindings.bindBidirectional(resulImagin.textProperty(), NumeroComplejo3.imaginarioProperty(), new NumberStringConverter());
 			}
+			if(ops.getSelectionModel().getSelectedItem() == "*") {
+				NumeroComplejo3 = NumeroComplejo1.multiply(NumeroComplejo2);
+				resulReal.textProperty().bind(NumeroComplejo3.realProperty().asString("%.0f"));
+				resulImagin.textProperty().bind(NumeroComplejo3.imaginarioProperty().asString("%.0f"));
+				//Bindings.bindBidirectional(resulReal.textProperty(), NumeroComplejo3.realProperty(), new NumberStringConverter());
+				//Bindings.bindBidirectional(resulImagin.textProperty(), NumeroComplejo3.imaginarioProperty(), new NumberStringConverter());
+			}
 		});
 	}
 
