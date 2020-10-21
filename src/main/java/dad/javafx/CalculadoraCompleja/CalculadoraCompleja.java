@@ -1,6 +1,7 @@
 package dad.javafx.CalculadoraCompleja;
 
 import javafx.application.Application;
+import javafx.beans.property.DoubleProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -15,10 +16,16 @@ import javafx.stage.Stage;
 
 public class CalculadoraCompleja extends Application {
 
+	//View
 	private TextField real1, imagin1, real2, imagin2, resul1, resul2;
 	private ComboBox<String> ops;
 	private Separator separator;
-
+	
+	//Model
+	private Complejo NumeroComplejo1 = new Complejo();
+	private Complejo NumeroComplejo2 = new Complejo();
+	private Complejo NumeroComplejo3 = new Complejo();
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
@@ -93,6 +100,9 @@ public class CalculadoraCompleja extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Calculadora Compleja");
 		primaryStage.show();
+		
+		
+		//Bindings
 
 	}
 
