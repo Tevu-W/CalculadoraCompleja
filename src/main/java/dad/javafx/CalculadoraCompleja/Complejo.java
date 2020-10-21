@@ -1,5 +1,6 @@
 package dad.javafx.CalculadoraCompleja;
 
+import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
@@ -58,8 +59,19 @@ public class Complejo {
 	}
 	
 	public Complejo multiply(Complejo c) {
+		//(a,b) Complejo 1
+		//(c,d) Complejo 2
+		
 		Complejo r = new Complejo();
 		//(a*c - b*d)
+		DoubleBinding a_c = realProperty().multiply(c.realProperty());
+		DoubleBinding b_d = imaginarioProperty().multiply(c.imaginarioProperty());
+		r.realProperty().bind(a_c.subtract(b_d));
+		
+		//(a*d + b*c)
+		DoubleBinding a_d = realProperty().multiply(c.imaginarioProperty());
+		DoubleBinding b_c = imaginarioProperty().multiply(c.realProperty());
+		r.imaginarioProperty().bind(a_d.add(b_c));
 		return r;
 	}
 	
