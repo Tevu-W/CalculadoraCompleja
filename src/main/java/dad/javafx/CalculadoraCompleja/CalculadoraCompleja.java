@@ -1,7 +1,10 @@
 package dad.javafx.CalculadoraCompleja;
 
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -13,11 +16,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.converter.NumberStringConverter;
 
 public class CalculadoraCompleja extends Application {
 
 	//View
-	private TextField real1, imagin1, real2, imagin2, resul1, resul2;
+	private TextField real1, imagin1, real2, imagin2, resulReal, resulImagin;
 	private ComboBox<String> ops;
 	private Separator separator;
 	
@@ -25,6 +29,7 @@ public class CalculadoraCompleja extends Application {
 	private Complejo NumeroComplejo1 = new Complejo();
 	private Complejo NumeroComplejo2 = new Complejo();
 	private Complejo NumeroComplejo3 = new Complejo();
+	private StringProperty comboelegido = new SimpleStringProperty();
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -50,19 +55,20 @@ public class CalculadoraCompleja extends Application {
 		imagin2.setText("0");
 		imagin2.setAlignment(Pos.CENTER);
 
-		resul1 = new TextField();
-		resul1.setPrefColumnCount(3);
-		resul1.setText("0");
-		resul1.setAlignment(Pos.CENTER);
+		resulReal = new TextField();
+		resulReal.setPrefColumnCount(3);
+		resulReal.setText("0");
+		resulReal.setAlignment(Pos.CENTER);
+		resulReal.setEditable(false);
 
-		resul2 = new TextField();
-		resul2.setPrefColumnCount(3);
-		resul2.setText("0");
-		resul2.setAlignment(Pos.CENTER);
+		resulImagin = new TextField();
+		resulImagin.setPrefColumnCount(3);
+		resulImagin.setText("0");
+		resulImagin.setAlignment(Pos.CENTER);
+		resulImagin.setEditable(false);
 
 		ops = new ComboBox<String>();
 		ops.getItems().addAll("+", "-", "*", "/");
-		ops.getSelectionModel().select("+");
 
 		separator = new Separator();
 		separator.setOrientation(Orientation.HORIZONTAL);
@@ -80,7 +86,7 @@ public class CalculadoraCompleja extends Application {
 		HBox resultadoComplejo = new HBox();
 		resultadoComplejo.setAlignment(Pos.BASELINE_CENTER);
 		resultadoComplejo.setSpacing(5);
-		resultadoComplejo.getChildren().addAll(resul1, new Label("+"), resul2, new Label("i"));
+		resultadoComplejo.getChildren().addAll(resulReal, new Label("+"), resulImagin, new Label("i"));
 
 		VBox vbox1 = new VBox();
 		vbox1.setAlignment(Pos.CENTER);
@@ -103,7 +109,30 @@ public class CalculadoraCompleja extends Application {
 		
 		
 		//Bindings
+		Bindings.bindBidirectional(real1.textProperty(), NumeroComplejo1.realProperty(), new NumberStringConverter());
+		Bindings.bindBidirectional(imagin1.textProperty(), NumeroComplejo1.imaginarioProperty(), new NumberStringConverter());
 
+		Bindings.bindBidirectional(real2.textProperty(), NumeroComplejo2.realProperty(), new NumberStringConverter());
+		Bindings.bindBidirectional(imagin2.textProperty(), NumeroComplejo2.imaginarioProperty(), new NumberStringConverter());
+				
+		comboelegido.bind(ops.getSelectionModel().selectedItemProperty());
+		
+		ops.getSelectionModel().selectedItemProperty().addListener((o, ov, nv) -> {
+			if(ops.getSelectionModel().getSelectedItem() == "+") {
+				NumeroComplejo3 = NumeroComplejo1.add(NumeroComplejo2);
+				resulReal.textProperty().bind(NumeroComplejo3.realProperty().asString());
+				resulImagin.textProperty().bind(NumeroComplejo3.imaginarioProperty().asString());
+				//Bindings.bindBidirectional(resulReal.textProperty(), NumeroComplejo3.realProperty(), new NumberStringConverter());
+				//Bindings.bindBidirectional(resulImagin.textProperty(), NumeroComplejo3.imaginarioProperty(), new NumberStringConverter());
+			}
+			if(ops.getSelectionModel().getSelectedItem() == "-") {
+				NumeroComplejo3 = NumeroComplejo1.substract(NumeroComplejo2);
+				resulReal.textProperty().bind(NumeroComplejo3.realProperty().asString());
+				resulImagin.textProperty().bind(NumeroComplejo3.imaginarioProperty().asString());
+				//Bindings.bindBidirectional(resulReal.textProperty(), NumeroComplejo3.realProperty(), new NumberStringConverter());
+				//Bindings.bindBidirectional(resulImagin.textProperty(), NumeroComplejo3.imaginarioProperty(), new NumberStringConverter());
+			}
+		});
 	}
 
 	public static void main(String[] args) {
