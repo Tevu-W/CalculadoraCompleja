@@ -51,10 +51,11 @@ public class Complejo {
 
 	public Complejo substract(Complejo c) {
 		Complejo r = new Complejo();
-		// (a-c)
+
 		r.realProperty().bind(realProperty().subtract(c.realProperty()));
-		// (b-c)
+
 		r.imaginarioProperty().bind(imaginarioProperty().subtract(c.imaginarioProperty()));
+
 		return r;
 	}
 
