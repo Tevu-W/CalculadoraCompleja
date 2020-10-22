@@ -29,7 +29,6 @@ public class CalculadoraCompleja extends Application {
 	private Complejo NumeroComplejo1 = new Complejo();
 	private Complejo NumeroComplejo2 = new Complejo();
 	private Complejo NumeroComplejo3 = new Complejo();
-	private StringProperty comboelegido = new SimpleStringProperty();
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -69,6 +68,7 @@ public class CalculadoraCompleja extends Application {
 
 		ops = new ComboBox<String>();
 		ops.getItems().addAll("+", "-", "*", "/");
+		ops.getSelectionModel().select("+");
 
 		separator = new Separator();
 		separator.setOrientation(Orientation.HORIZONTAL);
@@ -116,8 +116,12 @@ public class CalculadoraCompleja extends Application {
 		Bindings.bindBidirectional(imagin2.textProperty(), NumeroComplejo2.imaginarioProperty(),
 				new NumberStringConverter());
 
-		comboelegido.bind(ops.getSelectionModel().selectedItemProperty());
+		//Suma por Defecto
+		NumeroComplejo3 = NumeroComplejo1.add(NumeroComplejo2);
+		resulReal.textProperty().bind(NumeroComplejo3.realProperty().asString("%.2f"));
+		resulImagin.textProperty().bind(NumeroComplejo3.imaginarioProperty().asString("%.2f"));
 
+		//Operaciones a elegir
 		ops.getSelectionModel().selectedItemProperty().addListener((o, ov, nv) -> {
 			if (ops.getSelectionModel().getSelectedItem() == "+") {
 				NumeroComplejo3 = NumeroComplejo1.add(NumeroComplejo2);
@@ -134,7 +138,7 @@ public class CalculadoraCompleja extends Application {
 				resulReal.textProperty().bind(NumeroComplejo3.realProperty().asString("%.2f"));
 				resulImagin.textProperty().bind(NumeroComplejo3.imaginarioProperty().asString("%.2f"));
 			}
-			if(ops.getSelectionModel().getSelectedItem() == "/") {
+			if (ops.getSelectionModel().getSelectedItem() == "/") {
 				NumeroComplejo3 = NumeroComplejo1.divide(NumeroComplejo2);
 				resulReal.textProperty().bind(NumeroComplejo3.realProperty().asString("%.2f"));
 				resulImagin.textProperty().bind(NumeroComplejo3.imaginarioProperty().asString("%.2f"));
