@@ -116,12 +116,10 @@ public class CalculadoraCompleja extends Application {
 		Bindings.bindBidirectional(imagin2.textProperty(), NumeroComplejo2.imaginarioProperty(),
 				new NumberStringConverter());
 
-		//Suma por Defecto
+		// Suma por Defecto
 		NumeroComplejo3 = NumeroComplejo1.add(NumeroComplejo2);
-		resulReal.textProperty().bind(NumeroComplejo3.realProperty().asString("%.2f"));
-		resulImagin.textProperty().bind(NumeroComplejo3.imaginarioProperty().asString("%.2f"));
 
-		//Operaciones a elegir
+		// Operaciones a elegir
 		ops.getSelectionModel().selectedItemProperty().addListener((o, ov, nv) -> {
 			if (ops.getSelectionModel().getSelectedItem() == "+") {
 				NumeroComplejo3 = NumeroComplejo1.add(NumeroComplejo2);
