@@ -55,12 +55,14 @@ public class CalculadoraCompleja extends Application {
 		resulReal.setText("0");
 		resulReal.setAlignment(Pos.CENTER);
 		resulReal.setEditable(false);
+		resulReal.setDisable(true);
 
 		resulImagin = new TextField();
 		resulImagin.setPrefColumnCount(3);
 		resulImagin.setText("0");
 		resulImagin.setAlignment(Pos.CENTER);
 		resulImagin.setEditable(false);
+		resulImagin.setDisable(true);
 
 		ops = new ComboBox<String>();
 		ops.getItems().addAll("+", "-", "*", "/");
