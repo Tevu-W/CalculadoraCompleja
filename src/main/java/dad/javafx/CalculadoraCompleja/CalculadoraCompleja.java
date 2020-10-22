@@ -2,10 +2,6 @@ package dad.javafx.CalculadoraCompleja;
 
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -116,12 +112,12 @@ public class CalculadoraCompleja extends Application {
 		Bindings.bindBidirectional(imagin2.textProperty(), NumeroComplejo2.imaginarioProperty(),
 				new NumberStringConverter());
 
-		//Default operation
+		// Default operation
 		NumeroComplejo3 = NumeroComplejo1.add(NumeroComplejo2);
 		resulReal.textProperty().bind(NumeroComplejo3.realProperty().asString("%.2f"));
 		resulImagin.textProperty().bind(NumeroComplejo3.imaginarioProperty().asString("%.2f"));
 
-		//Operations to choose
+		// Operations to choose
 		ops.getSelectionModel().selectedItemProperty().addListener((o, ov, nv) -> {
 			if (ops.getSelectionModel().getSelectedItem() == "+") {
 				NumeroComplejo3 = NumeroComplejo1.add(NumeroComplejo2);
