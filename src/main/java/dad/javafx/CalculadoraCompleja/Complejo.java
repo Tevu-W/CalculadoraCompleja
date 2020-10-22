@@ -44,6 +44,7 @@ public class Complejo {
 
 	public Complejo add(Complejo c) {
 		Complejo r = new Complejo();
+		
 		r.realProperty().bind(realProperty().add(c.realProperty()));
 		r.imaginarioProperty().bind(imaginarioProperty().add(c.imaginarioProperty()));
 		return r;
@@ -60,7 +61,6 @@ public class Complejo {
 	}
 
 	public Complejo multiply(Complejo c) {
-
 		Complejo r = new Complejo();
 
 		DoubleBinding a_c = realProperty().multiply(c.realProperty());
@@ -75,6 +75,7 @@ public class Complejo {
 
 	public Complejo divide(Complejo c) {
 		Complejo r = new Complejo();
+		
 		DoubleBinding a_c = realProperty().multiply(c.realProperty());
 		DoubleBinding b_d = imaginarioProperty().multiply(c.imaginarioProperty());
 
